@@ -52,7 +52,6 @@ func readConfig(config *Config) {
 	config.State = readOsVar("PULL_REQUEST_NEW_STATE")
 	config.GitUsername = readOsVar("GIT_USERNAME")
 	config.GitPassword = readOsVar("GIT_TOKEN")
-	config.GitRepository = readOsVar("GIT_REPOSITORY")
 
 	tmpNumber := os.Getenv("PULL_REQUEST_NUMBER")
 
@@ -71,9 +70,6 @@ func readTemplateData(config *Config) {
 
 	config.TemplateData = &TemplateData{}
 
-	baseDomain := readOsVar("BASE_DOMAIN")
-	requestCpu := readOsVar("REQUEST_CPU")
-	requestMemory := readOsVar("REQUEST_MEMORY")
 	containerImage := readOsVar("CONTAINER_IMAGE")
 	containerPort := readOsVar("CONTAINER_PORT")
 	namespace := readOsVar("K8S_NAMESPACE")
@@ -81,15 +77,10 @@ func readTemplateData(config *Config) {
 
 	config.TemplateData.TemplateDeploymentName = "pr-env-" + namespace + "-" + pullRequestNumber
 	config.TemplateData.TemplateNamespace = namespace
-	config.TemplateData.TemplateAppLabel = "pr-env-" + namespace + "-" + pullRequestNumber
 	config.TemplateData.TemplateContainerImage = containerImage
 	config.TemplateData.TemplateContainerTag = pullRequestNumber
 	config.TemplateData.TemplateContainerName = "pr-env-" + namespace + "-" + pullRequestNumber
 	config.TemplateData.TemplatePort = containerPort
-	config.TemplateData.TemplateMemory = requestMemory
-	config.TemplateData.TemplateCpu = requestCpu
-	config.TemplateData.TemplateDomainName = "pr-env." + baseDomain + "/" + namespace + "/" + pullRequestNumber
-	config.TemplateData.PullRequestNumber = pullRequestNumber
 
 }
 
