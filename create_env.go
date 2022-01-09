@@ -95,17 +95,17 @@ func CreateKustomization(path string, folderName string) error {
 }
 
 func CreateValuesFile(path string, folderName string, config *Config) error {
-	err := CreateDeploymentFile(path, folderName+"-deployment", config)
+	err := CreateDeploymentFile(path, folderName, config)
 	if err != nil {
 		log.Error().Err(err).Msgf("there happened an error when creating the deployment patch")
 	}
 
-	err = CreateServiceFile(path, folderName+"-service", config)
+	err = CreateServiceFile(path, folderName, config)
 	if err != nil {
 		log.Error().Err(err).Msgf("there happened an error when creating the service patch")
 	}
 
-	err = CreateIngressFile(path, folderName+"-ingress", config)
+	err = CreateIngressFile(path, folderName, config)
 	if err != nil {
 		log.Error().Err(err).Msgf("there happened an error when creating the ingress patch")
 	}
